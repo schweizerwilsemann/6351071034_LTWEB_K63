@@ -1,0 +1,9 @@
+﻿
+@model IEnumerable<_6351071034_LTWEB_K63.Models.NHAXUATBAN>
+
+<ul>
+    @foreach (var i in Model)
+    {
+        <li><a href="@Url.Action("BooksByPublisher", "Home", new { id = i.MaNXB })">@i.TenNXB</a></li>
+    }
+</ul>

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<_6351071034_LTWEB_K63.Models.CHUDE>
+
+<ul>
+    @foreach (var category in Model)
+    {
+        <li><a href="@Url.Action("BooksByCategory", "Home", new { id = category.MaCD })">@category.TenChuDe</a></li>
+
+    }
+
+</ul>
