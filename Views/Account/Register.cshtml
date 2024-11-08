@@ -1,0 +1,80 @@
+﻿@model _6351071034_LTWEB_K63.Models.KHACHHANG
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_HomeLayOutPage.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resgister</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/register.css" />
+    <script type="text/javascript" src="~/Scripts/script.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { onsubmit = "return validateForm();" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <h1>Register</h1>
+        <p>To be able to use all features , you will require an account. The form below will allow you to create a new account if you don't have one yet.</p>
+        <br/>
+        <label>@Html.LabelFor(m => m.HoTen)</label><br>
+        @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "text-danger" })
+        <br>
+
+        <label>@Html.LabelFor(m => m.Taikhoan)</label><br>
+        @Html.TextBoxFor(m => m.Taikhoan, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Taikhoan, "", new { @class = "text-danger" })
+        <br>
+
+        <label>@Html.LabelFor(m => m.Email)</label><br>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        <br>
+
+        <label>Create a password</label><br>
+        @Html.PasswordFor(m => m.Matkhau, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Matkhau, "", new { @class = "text-danger" })
+        <br>
+
+        <label>Retype password</label><br>
+        <input type="password" name="retype_password" class="form-control" />
+        @Html.ValidationMessageFor(m => m.Matkhau, "", new { @class = "text-danger" })
+        <br>
+
+        <label>@Html.LabelFor(m => m.DiachiKH)</label><br>
+        @Html.TextBoxFor(m => m.DiachiKH, new { @class = "form-control" })<br>
+
+        <label>@Html.LabelFor(m => m.DienthoaiKH)</label><br>
+        @Html.TextBoxFor(m => m.DienthoaiKH, new { @class = "form-control" })<br>
+
+        <label>@Html.LabelFor(m => m.Ngaysinh)</label><br>
+        @Html.TextBoxFor(m => m.Ngaysinh, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })<br>
+
+        <label>
+            <input type="checkbox" name="terms"> By registering on our site you agree to our
+            <a href="#service">Terms of Service</a> and <a href="#policy">Privacy Policy</a>
+        </label>
+
+        <div class="button">
+            <input type="submit" class="button" style="display: inline-block;
+                 cursor: pointer;
+                 width: 170px;
+                 height: 45px;
+                 line-height: 45px; /* Ensures vertical centering */
+                 text-align:center;
+                 border-radius: 22px;
+                 background-color: #333;
+                 color: #ede385;
+                 text-decoration: none;"
+                 value="Set Up Account">
+        </div>
+    }
+</body>
+</html>
+
+

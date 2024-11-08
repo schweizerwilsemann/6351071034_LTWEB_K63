@@ -1,0 +1,109 @@
+﻿@using _6351071034_LTWEB_K63.Models;
+@model List<Giohang>
+@{
+    ViewBag.Title = "Dathang";
+    Layout = "~/Views/Shared/_HomeLayOutPage.cshtml";
+}
+
+<h2 style="text-align:center">THÔNG TIN HÀNG HÓA</h2>
+<h2 style="text-align:center; color: #ede385;">THÔNG TIN GIỎ HÀNG</h2>
+<table align="center" style="border-collapse: collapse; width: 50%; color: #ede385;">
+    <tr style="text-align:center; font-weight:bold; border: 1px solid #ede385; background-color: #333;">
+        <td style="border: 1px solid #ede385; padding: 8px;">Mã sách</td>
+        <td style="border: 1px solid #ede385; padding: 8px;">Tên sách</td>
+        <td style="border: 1px solid #ede385; padding: 8px;">Ảnh bìa</td>
+        <td style="border: 1px solid #ede385; padding: 8px;">Số lượng</td>
+        <td style="border: 1px solid #ede385; padding: 8px;">Đơn giá</td>
+        <td style="border: 1px solid #ede385; padding: 8px;">Thành tiền</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="text-align:center; font-weight:bold; border: 1px solid #ede385;">
+            <td style="border: 1px solid #ede385; padding: 8px;">@item.iMasach</td>
+            <td style="border: 1px solid #ede385; padding: 8px;">@item.sTensach</td>
+            <td style="border: 1px solid #ede385; padding: 8px;"><img style="height: 6.4rem ; width:4rem ;" src="@item.sAnhbia" alt="" style="width: 3rem; height: 4.8rem;" /></td>
+            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @iMaSp = item.iMasach }))
+            {
+                <td style="border: 1px solid #ede385; padding: 8px;">@item.iSoluong</td>
+                <td style="border: 1px solid #ede385; padding: 8px;">@string.Format("{0:0,0}", item.dDongia)</td>
+                <td style="border: 1px solid #ede385; padding: 8px;">@string.Format("{0:0,0}", item.dThanhtien)</td>
+            }
+        </tr>
+    }
+    <tr style="text-align:right; font-weight:bold; color:red; border: 1px solid #ede385;">
+        <td colspan="3" style="border: 1px solid #ede385; padding: 8px;">Số lượng sách: @ViewBag.Tongsoluong</td>
+        <td colspan="3" style="border: 1px solid #ede385; padding: 8px;">Tổng tiền: @string.Format("{0:0,0}", ViewBag.Tongtien) VND</td>
+    </tr>
+    <tr style="text-align:right; font-weight:bold; color:blue; border: 1px solid #ede385;">
+        <td colspan="6" style="border: 1px solid #ede385; padding: 8px;">
+            @Html.ActionLink("TRỞ VỀ GIỎ HÀNG", "GioHang", "GioHang", null, new { style = "color: #ede385;" })
+        </td>
+    </tr>
+</table>
+
+<br />
+<h2 style="text-align:center">THÔNG TIN ĐẶT HÀNG</h2>
+@{
+    QLBansachEntities db = new QLBansachEntities();
+    var UserID = Session["UserId"];
+    int id = Convert.ToInt32(UserID);
+    var kh = db.KHACHHANGs.FirstOrDefault(u => u.MaKH == id);
+}
+<table align="center"
+       style="border-collapse: collapse; width: 50%; color: #ede385; margin-left: 20.88rem">
+    @using (Html.BeginForm())
+    {@Html.ValidationSummary(true, "", new
+       {
+           @style =
+"color: #ede385;"
+       })
+    <tr style="height: 40px; border: 1px solid #ede385; background-color: #333">
+        <td style="border: 1px solid #ede385; padding: 8px">Họ tên khách hàng:</td>
+        <td style="border: 1px solid #ede385; padding: 8px; font-weight: bold">
+            @kh.HoTen
+        </td>
+    </tr>
+    <tr style="height: 40px; border: 1px solid #ede385">
+        <td style="border: 1px solid #ede385; padding: 8px">Địa chỉ:</td>
+        <td style="border: 1px solid #ede385; padding: 8px; font-weight: bold">
+            @kh.DiachiKH
+        </td>
+    </tr>
+    <tr style="height: 40px; border: 1px solid #ede385">
+        <td style="border: 1px solid #ede385; padding: 8px">Điện thoại:</td>
+        <td style="border: 1px solid #ede385; padding: 8px; font-weight: bold">
+            @kh.DienthoaiKH
+        </td>
+    </tr>
+    <tr style="height: 40px; border: 1px solid #ede385">
+        <td style="border: 1px solid #ede385; padding: 8px">Ngày đặt:</td>
+        <td style="border: 1px solid #ede385; padding: 8px; font-weight: bold">
+            @DateTime.Now.ToShortDateString()
+        </td>
+    </tr>
+    <tr style="height: 40px; border: 1px solid #ede385">
+        <td style="border: 1px solid #ede385; padding: 8px">Ngày giao hàng:</td>
+        <td style="border: 1px solid #ede385; padding: 8px; font-weight: bold">
+            <input type="date"
+                   name="Ngaygiao"
+                   style="background-color: #333; color: #ede385" />
+        </td>
+    </tr>
+
+}
+</table>
+@using (Html.BeginForm("XacNhanDonHang", "GioHang", FormMethod.Post))
+{
+    <div style="margin: 3rem 0 0 30.5rem"> 
+        <input type="submit" 
+               value="ĐỒNG Ý ĐẶT HÀNG" 
+               style="cursor: pointer; 
+                        width: 170px; 
+                        height: 45px; 
+                        text-align:center; 
+                        border-radius: 22px; 
+                        background-color: #333; 
+                        color: #ede385;" /> 
+    </div>
+
+}
