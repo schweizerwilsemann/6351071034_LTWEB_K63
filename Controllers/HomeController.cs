@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using _6351071034_LTWEB_K63.Models;
 
+using PagedList;
+using PagedList.Mvc;
+
 namespace _6351071034_LTWEB_K63.Controllers
 {
     public class HomeController : Controller
@@ -13,15 +16,21 @@ namespace _6351071034_LTWEB_K63.Controllers
         // Declare DbContext here
         private QLBansachEntities db = new QLBansachEntities();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            // Eagerly load related entities
-            var books = db.SACHes.Include(b => b.NHAXUATBAN).ToList();
-            ViewBag.Categories = db.CHUDEs.ToList();
-            ViewBag.Books = books;
+            int pageSize = 5;               // Số mục trên mỗi trang
+            int pageNum = (page ?? 1);      // Trang hiện tại, mặc định là 1 nếu chưa chọn trang nào
 
-            return View(books); // Return list of books to view
+            // Lấy dữ liệu từ database và phân trang
+            var books = db.SACHes.Include(b => b.NHAXUATBAN).ToList();
+            var pagedBooks = books.ToPagedList(pageNum, pageSize); // Tạo IPagedList cho Model
+
+            ViewBag.CurrentPage = pageNum;
+            ViewBag.TotalPages = pagedBooks.PageCount; // Số lượng trang tổng cộng
+
+            return View(pagedBooks); // Truyền IPagedList vào View
         }
+
 
         public ActionResult CHUDE()
         {

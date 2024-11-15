@@ -1,0 +1,101 @@
+﻿@using _6351071034_LTWEB_K63.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<_6351071034_LTWEB_K63.Models.SACH>
+@helper Truncate(string input, int length)
+{
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0, length)<text>...</text>
+    }
+}
+
+@{
+    ViewBag.Title = "SACH";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+
+<h2>SACH</h2>
+
+<p>
+    @Html.ActionLink("Create", "Themmoisach", "Admin");
+</p>
+
+<div class="custom-table-container">
+    <table class="custom-table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model[0].Masach)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Tensach)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Giaban)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Mota)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Anhbia)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Ngaycapnhat)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Soluongton)</th>
+            <th>@Html.DisplayNameFor(model => model[0].MaCD)</th>
+            <th>@Html.DisplayNameFor(model => model[0].MaNXB)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Masach)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tensach)</td>
+                <td>@Html.DisplayFor(modelItem => item.Giaban)</td>
+                <td>@Truncate(item.Mota, 100)</td>
+                <td><img src="@item.Anhbia" alt="@item.Tensach" class="cover-image" /></td>
+                <td>@Html.DisplayFor(modelItem => item.Ngaycapnhat)</td>
+                <td>@Html.DisplayFor(modelItem => item.Soluongton)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaCD)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaNXB)</td>
+                <td>
+                    @Html.ActionLink("Sửa", "Suasach", new { id = item.Masach }) |
+                    @Html.ActionLink("Chi tiết", "Chitietsach", new { id = item.Masach }) |
+                    @Html.ActionLink("Xoá", "Xoasach", new { id = item.Masach })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<!-- Thêm phân trang -->
+
+<div class="cleaner_with_height">&nbsp;</div>
+
+@{
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+}
+<div style="text-align: center; margin-top: 10px; font-weight: bold;">
+    Trang @ViewBag.CurrentPage / @ViewBag.TotalPages
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <!-- Link to Previous Page -->
+    @if (currentPage > 1)
+    {
+        <a href="@Url.Action("SACH", new { page = currentPage - 1 })" class="page-link">Previous</a>
+    }
+
+    <!-- Link to each page -->
+    @for (int i = 1; i <= totalPages; i++)
+    {
+        if (i == currentPage)
+        {
+            <span class="page-link active">@i</span>
+        }
+        else
+        {
+            <a href="@Url.Action("SACH", new { page = i })" class="page-link">@i</a>
+        }
+    }
+
+    <!-- Link to Next Page -->
+    @if (currentPage < totalPages)
+    {
+        <a href="@Url.Action("SACH", new { page = currentPage + 1 })" class="page-link">Next</a>
+    }
+</div>

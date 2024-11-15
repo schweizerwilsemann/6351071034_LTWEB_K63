@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="~/Content/templatemo_style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/AdminStyles.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-Spacelab.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tiny.cloud/1/lh19ncbqu9j64bt3g996wayynlv3uvcat76ypkw0kiydukfd/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+</head>
+<body>
+    <div id="templatemo_container">
+        <div id="templatemo_menu">
+            <ul>
+                <li>@Html.ActionLink("Home", "Index", "Admin", null, new { @class = "current" })</li>
+                <li>@Html.ActionLink("Quản lý chủ đề", "SanphamChart", "Admin")</li>
+                <li>@Html.ActionLink("Quản lý nhà xuất bản", "Nhaxuatban", "Admin")</li>
+                <li>@Html.ActionLink("Quản lý sách", "Sach", "Admin")</li>
+
+
+                @if (Session["adminLoginSession"] != null)
+                {
+                    <li style="color: #FCF88E; font-weight:650;">Hello, @Session["adminLoginSession"]</li>
+                    <!-- Hiển thị tên người dùng -->
+                    <li>@Html.ActionLink("Logout", "Logout", "Admin")</li>
+                    <!-- Link Logout -->
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Login", "Login", "Admin")</li>
+                    <!-- Link Login nếu chưa đăng nhập -->
+                }
+            </ul>
+        </div> <!-- end of menu -->
+
+        <div id="templatemo_header">
+            <div id="templatemo_special_offers">
+                <p>
+                    <span>25%</span> discounts for
+                    purchase over $80
+                </p>
+                <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
+            </div>
+
+
+            <div id="templatemo_new_books">
+                <ul>
+                    <li>Suspen disse</li>
+                    <li>Maece nas metus</li>
+                    <li>In sed risus ac feli</li>
+                </ul>
+                <a href="subpage.html" style="margin-left: 50px;">Read more...</a>
+            </div>
+        </div>
+        <div id="templatemo_content">
+
+            @RenderBody()
+            <div class="cleaner_with_height">&nbsp;</div>
+        </div> <!-- end of content -->
+
+        <div id="templatemo_footer">
+
+            <a href="subpage.html">Home</a> | <a href="subpage.html">Search</a> | <a href="subpage.html">Books</a> | <a href="#">New Releases</a> | <a href="#">FAQs</a> | <a href="#">Contact Us</a><br />
+            Copyright © 2024 <a href="#"><strong>Your Company Name</strong></a>
+            <!-- Credit: www.templatemo.com -->
+        </div>
+        <!-- end of footer -->
+        <!--  Free CSS Template www.templatemo.com -->
+    </div> <!-- end of container -->
+    <!-- templatemo 086 book store -->
+    <!--
+    Book Store Template
+    http://www.templatemo.com/preview/templatemo_086_book_store
+    -->
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Nov 25, 2024:
+                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+                // Early access to document converters
+                'importword', 'exportword', 'exportpdf'
+            ],
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+            exportpdf_converter_options: { 'format': 'Letter', 'margin_top': '1in', 'margin_right': '1in', 'margin_bottom': '1in', 'margin_left': '1in' },
+            exportword_converter_options: { 'document': { 'size': 'Letter' } },
+            importword_converter_options: { 'formatting': { 'styles': 'inline', 'resets': 'inline', 'defaults': 'inline', } },
+        });
+    </script>
+</body>
+</html>

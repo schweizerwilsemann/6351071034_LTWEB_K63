@@ -1,0 +1,161 @@
+﻿/* Made with love by Mutiullah Samim*/
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html, body {
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Giữ cố định ảnh nền khi cuộn */
+    height: 100%;
+    width: 100%;
+    font-family: 'Numans', sans-serif;
+}
+
+/* Đường viền dọc cho các ô trong bảng */
+table {
+    border-collapse: collapse; /* Đảm bảo không có khoảng trống giữa các ô */
+    width: 100%; /* Đặt chiều rộng bảng theo ý muốn */
+}
+
+    table th, table td {
+        border-right: 1px solid #ccc; /* Đường viền bên phải cho mỗi ô */
+        padding: 8px; /* Khoảng đệm trong ô */
+    }
+        /* Loại bỏ đường viền bên phải của cột cuối cùng để không bị trùng */
+        table th:last-child, table td:last-child {
+            border-right: none;
+        }
+
+
+.container {
+    height: 100%;
+    align-content: center;
+}
+
+.card {
+    height: 500px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+.social_icon span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+}
+
+    .social_icon span:hover {
+        color: white;
+        cursor: pointer;
+    }
+
+.card-header h3 {
+    color: white;
+}
+
+.social_icon {
+    position: absolute;
+    right: 20px;
+    top: -45px;
+}
+
+.input-group-prepend span {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
+}
+
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+    color: white;
+}
+
+    .remember input {
+        width: 20px;
+        height: 20px;
+        margin-left: 15px;
+        margin-right: 5px;
+    }
+
+.login_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+
+    .login_btn:hover {
+        color: black;
+        background-color: white;
+    }
+
+.links {
+    color: white;
+}
+
+    .links a {
+        margin-left: 4px;
+    }
+
+/* Đặt width cố định cho table và chỉnh màu nền */
+.custom-table-container {
+    width: 920px;
+    margin: 0 auto; /* Căn giữa table */
+    padding: 20px;
+    border-radius: 8px; /* Bo góc table */
+}
+
+/* Table styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    /* Định dạng tiêu đề */
+    .custom-table th {
+        color: white;
+        padding: 10px;
+        text-align: left;
+    }
+
+    /* Định dạng dòng dữ liệu */
+    .custom-table td {
+        color: #68e6a7 ;
+        padding: 8px;
+        border-bottom: 1px solid;
+    }
+
+/* Định dạng ảnh bìa */
+.cover-image {
+    width: 50px;
+    height: 75px;
+    object-fit: cover; /* Để ảnh hiển thị vừa khít kích thước */
+}
+
+
+.page-link {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+    .page-link:hover {
+        background-color: #f0f0f0;
+    }
+
+    .page-link.active {
+        background-color: #333;
+        color: white;
+        cursor: default;
+    }

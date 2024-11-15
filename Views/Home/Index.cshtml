@@ -1,29 +1,86 @@
-﻿@model IEnumerable<_6351071034_LTWEB_K63.Models.SACH>
+﻿@model IPagedList<_6351071034_LTWEB_K63.Models.SACH>
+@using PagedList;
+@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_HomeLayOutPage.cshtml";
 }
 
+<div id="templatemo_content_right">
+    @foreach (var book in Model)
+    {
+        <div class="templatemo_product_box">
+            <h1>@book.Tensach <span>(by @book.NHAXUATBAN.TenNXB)</span></h1>
+            <img src="@book.Anhbia" alt="@book.Tensach" style="width:100px;height:150px;" />
+            <div class="product_info">
+                <p>@book.Mota</p>
+                <h3>@String.Format("{0:C}", book.Giaban)</h3>
+                <div class="detail_button">
+                    <a href="@Url.Action("BookDetail", "Home", new { id = book.Masach })">Detail</a>
+                </div>
+            </div>
+            <div class="cleaner">&nbsp;</div>
+        </div>
+    }
+</div> <!-- end of content right -->
 
-            <div id="templatemo_content_right">
-                @foreach (var book in ViewBag.Books as List<_6351071034_LTWEB_K63.Models.SACH>)
-                {
-                    <div class="templatemo_product_box">
-                        <h1>@book.Tensach <span>(by @book.NHAXUATBAN.TenNXB)</span></h1>
-                        <img src="@book.Anhbia" alt="@book.Tensach" style="width:100px;height:150px;" />
-                        <div class="product_info">
-                            <p>@book.Mota</p>
-                            <h3>@String.Format("{0:C}", book.Giaban)</h3> 
-                            <div class="detail_button">
-                                <a href="@Url.Action("BookDetail", "Home", new { id = book.Masach })">Detail</a>
-                            </div>
+<div class="cleaner_with_height">&nbsp;</div>
 
-                        </div>
-                        <div class="cleaner">&nbsp;</div>
-                    </div>
-                }
-               
-            </div> <!-- end of content right -->
+@{
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+}
+<div style="text-align: center; margin-top: 10px; font-weight: bold;">
+    Trang @ViewBag.CurrentPage / @ViewBag.TotalPages
+</div>
 
-            <div class="cleaner_with_height">&nbsp;</div>
-        
+<div style="text-align: center; margin-top: 20px;">
+    <!-- Link to Previous Page -->
+    @if (currentPage > 1)
+    {
+        <a href="@Url.Action("Index", new { page = currentPage - 1 })" class="page-link">Previous</a>
+    }
+
+    <!-- Link to each page -->
+    @for (int i = 1; i <= totalPages; i++)
+    {
+        if (i == currentPage)
+        {
+            <span class="page-link active">@i</span>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", new { page = i })" class="page-link">@i</a>
+        }
+    }
+
+    <!-- Link to Next Page -->
+    @if (currentPage < totalPages)
+    {
+        <a href="@Url.Action("Index", new { page = currentPage + 1 })" class="page-link">Next</a>
+    }
+</div>
+
+<!-- CSS inline cho phân trang -->
+<style>
+    .page-link {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 8px 12px;
+        color: #333;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+        .page-link:hover {
+            background-color: #f0f0f0;
+        }
+
+        .page-link.active {
+            background-color: #333;
+            color: white;
+            cursor: default;
+        }
+</style>

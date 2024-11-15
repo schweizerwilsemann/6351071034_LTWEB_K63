@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "SanphamChart";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2 style="color: #ffffff;">Biểu đồ theo chủ đề</h2>
+<canvas id="productChart" width="400" height="200"></canvas>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Gọi API để lấy dữ liệu
+        $.getJSON('@Url.Action("SanphamChartData", "Admin")', function (data) {
+            const labels = data.map(item => item.ChuDe);
+            const counts = data.map(item => item.SoLuong);
+
+            // Khởi tạo biểu đồ
+            var ctx = document.getElementById('productChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số lượng sách theo chủ đề',
+                        data: counts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)', // Màu nền cho các cột
+                        borderColor: '#FCF88E', // Màu viền của cột
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#FFFFFF' // Màu chữ cho legend
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#FFFFFF' // Màu chữ cho trục X
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#FFFFFF', // Màu chữ cho trục Y
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    body {
+        background-color: #2D2D2D; /* Màu nền tổng của trang */
+        color: #FFFFFF; /* Màu chữ toàn bộ trang */
+    }
+
+    #productChart {
+        background-color: #1c1c1c; /* Màu nền của biểu đồ */
+    }
+</style>

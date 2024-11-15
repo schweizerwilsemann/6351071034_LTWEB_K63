@@ -11,7 +11,8 @@ namespace _6351071034_LTWEB_K63.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class SACH
     {
         public SACH()
@@ -23,6 +24,7 @@ namespace _6351071034_LTWEB_K63.Models
         public int Masach { get; set; }
         public string Tensach { get; set; }
         public Nullable<decimal> Giaban { get; set; }
+        [AllowHtml]
         public string Mota { get; set; }
         public string Anhbia { get; set; }
         public Nullable<System.DateTime> Ngaycapnhat { get; set; }

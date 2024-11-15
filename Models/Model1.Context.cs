@@ -34,5 +34,6 @@ namespace _6351071034_LTWEB_K63.Models
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TACGIA> TACGIAs { get; set; }
         public DbSet<VIETSACH> VIETSACHes { get; set; }
+        public DbSet<ADMIN> ADMINs { get; set; }
     }
 }

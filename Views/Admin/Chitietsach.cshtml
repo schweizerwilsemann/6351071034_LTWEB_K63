@@ -1,0 +1,57 @@
+﻿@model _6351071034_LTWEB_K63.Models.SACH
+
+@{
+    ViewBag.Title = "Chitietsach";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2 style="color: aliceblue; font-weight: 650;">Chi tiết sách </h2>
+
+<div class="custom-table-container">
+    <hr />
+    <table class="custom-table" >
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Masach)</th>
+            <td>@Html.DisplayFor(model => model.Masach)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Tensach)</th>
+            <td>@Html.DisplayFor(model => model.Tensach)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Giaban)</th>
+            <td>@Html.DisplayFor(model => model.Giaban)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Mota)</th>
+            <td>@Html.DisplayFor(model => model.Mota)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Anhbia)</th>
+            <td>
+                <img class="cover-image" src="@Model.Anhbia" alt="Book Cover" />
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Ngaycapnhat)</th>
+            <td>@Html.DisplayFor(model => model.Ngaycapnhat)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Soluongton)</th>
+            <td>@Html.DisplayFor(model => model.Soluongton)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MaCD)</th>
+            <td>@Html.DisplayFor(model => model.MaCD)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MaNXB)</th>
+            <td>@Html.DisplayFor(model => model.MaNXB)</td>
+        </tr>
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Suasach", new { id = Model.Masach })) |
+    @Html.ActionLink("Back to List", "SACH")
+</p>
